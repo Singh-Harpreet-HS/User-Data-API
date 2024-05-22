@@ -1,8 +1,9 @@
 package com.userAuth.userAuthProject.models
 
+
 import jakarta.persistence.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import java.time.LocalDateTime
+
 
 @Document(collection = "users")
 data class MongoUser(

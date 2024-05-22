@@ -1,5 +1,6 @@
 package com.userAuth.userAuthProject.repository
 
+import com.userAuth.userAuthProject.dao.UserDao
 import com.userAuth.userAuthProject.models.User
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.JpaRepository
@@ -20,4 +21,10 @@ interface UserRepository : JpaRepository<User, Int>{
         @Param("email") email:String,
         @Param("password") password:String
         ):Int
+}
+
+class MySQLUserDao(private val userRepository: UserRepository): UserDao {
+    override fun save(user: com.userAuth.userAuthProject.dao.User): String {
+        userRepository.registerNewUser(......)
+    }
 }
