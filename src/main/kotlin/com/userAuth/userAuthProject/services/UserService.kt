@@ -1,9 +1,11 @@
 package com.userAuth.userAuthProject.services
 
+import com.userAuth.userAuthProject.dao.User
+import com.userAuth.userAuthProject.dao.UserDao
 import com.userAuth.userAuthProject.models.MongoUser
-import com.userAuth.userAuthProject.models.User
 import com.userAuth.userAuthProject.repository.MongoEntityRepository
 import com.userAuth.userAuthProject.repository.MongoUserDao
+import com.userAuth.userAuthProject.repository.MySQLUserDao
 import com.userAuth.userAuthProject.repository.UserRepository
 import com.userAuth.userAuthProject.rest_controllers.RegisterApiController
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,12 +15,9 @@ import org.springframework.stereotype.Service
 //
 
 @Service
-class UserService(private val userDao: MongoUserDao
+class UserService(@Value("\${db.type}") private val dbType: String, private val sqlUserDao: MySQLUserDao,private val mongouserDao: MongoUserDao
 ) {
 
-    fun registerUser(registerUserRequest: RegisterApiController.RegisterUserRequest) {
-
-    }
 
     fun registerNewUserServiceMethod(
         fname:String,
@@ -28,7 +27,28 @@ class UserService(private val userDao: MongoUserDao
     ) : Int{
         // Save user to SQL
 
-        userDao.save()
+        if(dbType == "SQL") {
+
+            val sqlUser = User(
+                firstName = fname,
+                lastName = lname,
+                email = email,
+                password = password,
+            )
+
+            sqlUserDao.save(sqlUser)
+
+        }else {
+
+            val mongodbUser = User(
+                firstName = fname,
+                lastName = lname,
+                email = email,
+                password = password,
+            )
+            mongouserDao.save(mongodbUser)
+        }
+
         return 1
     }
 }

@@ -12,7 +12,17 @@ interface MongoEntityRepository: MongoRepository<MongoUser,String> {
 }
 
 class MongoUserDao(private val mongoEntityRepository: MongoEntityRepository): UserDao {
-    override fun save(user: User): String {
-        mongoEntityRepository.save(......)
+
+    override fun save(user: com.userAuth.userAuthProject.dao.User): String {
+
+        val mongoUser = MongoUser(
+            firstName = user.firstName,
+            lastName = user.lastName,
+            email = user.email,
+            password = user.password,
+        )
+        mongoEntityRepository.save(mongoUser)
+
+        return "Success"
     }
 }

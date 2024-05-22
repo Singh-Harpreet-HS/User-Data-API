@@ -25,6 +25,14 @@ interface UserRepository : JpaRepository<User, Int>{
 
 class MySQLUserDao(private val userRepository: UserRepository): UserDao {
     override fun save(user: com.userAuth.userAuthProject.dao.User): String {
-        userRepository.registerNewUser(......)
+        val sqlUser = User(
+                firstName = user.firstName,
+                lastName = user.lastName,
+                email = user.email,
+                password = user.password,
+            )
+        userRepository.registerNewUser(sqlUser.firstName, sqlUser.lastName, sqlUser.email, sqlUser.password)
+
+        return "Success"
     }
 }
