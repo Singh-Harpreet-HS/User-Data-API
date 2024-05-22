@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1")
-class RegisterApiController {
-
-    @Autowired
-    lateinit var userService: UserService
+class RegisterApiController(private val userService: UserService) {
 
     @PostMapping("/user/register")
     fun registerNewUser(

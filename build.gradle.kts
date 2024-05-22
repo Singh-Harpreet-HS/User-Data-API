@@ -26,8 +26,14 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	//implementation("org.springframework.boot:spring-boot-starter-security") // Add Spring Security if not already added
 	implementation("org.mindrot:jbcrypt:0.4") // BCrypt dependency
+
+	//MongoDB
+	implementation ("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("org.mongodb:mongodb-driver-kotlin-coroutine:5.1.0")
+	implementation("org.mongodb:bson-kotlinx:5.1.0")
+// OR
+	implementation("org.mongodb:bson-kotlin:5.1.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -13,7 +13,7 @@ interface UserRepository : JpaRepository<User, Int>{
 
     @Transactional
     @Modifying
-    @Query(value="INSERT INTO USERS(firstName,lastName,email,password) VALUE(:firstName, :lastName, :email, :password)", nativeQuery = true)
+    @Query(value="INSERT INTO newusers(firstName,lastName,email,password) VALUE(:firstName, :lastName, :email, :password)", nativeQuery = true)
     fun registerNewUser(
         @Param("firstName") firstName:String,
         @Param("lastName") lastName:String,
